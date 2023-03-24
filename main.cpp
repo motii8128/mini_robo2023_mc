@@ -40,7 +40,6 @@ public:
     SamplePub()
     : Node("sample_node"), count_(0)
     {
-        pub_ = this->create_publisher<std_msgs::String>("string_pub");
 
         sub_R = this->create_subscription<geometry_msgs::Twist>(
             "/cmd_vel/move/R",
@@ -66,27 +65,13 @@ public:
             motorW2 = 1000 * msg->angular.y;
         });
         
-
-
-        timer_ = this->create_wall_timer(
-            500ms,
-            [&](){
-                auto msg = std::make_shared<std_msgs::String>();
-                msg->data = "Hello ros2mbed! " + std::to_string(count_++);
-                pub_->publish(msg);
-            });
-
-        
     }
 
 private:
-    int count_;
-    ros2::Publisher<std_msgs::String>::SharedPtr pub_;
     ros2::Subscription<geometry_msgs::Twist>::SharedPtr sub_R;
     ros2::Subscription<geometry_msgs::Twist>::SharedPtr sub_L;
     ros2::Subscription<geometry_msgs::Twist>::SharedPtr sub_wheel;
     
-    ros2::TimerBase::SharedPtr timer_;
 };
 
 
