@@ -10,4 +10,4 @@ Microcomputer
 ubuntu 20.04
 
 
-stm32 f767zi
+stm32 NUCLEO_f767zi
